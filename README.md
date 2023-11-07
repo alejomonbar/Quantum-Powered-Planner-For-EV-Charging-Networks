@@ -111,5 +111,17 @@ The Figure below shows the average cost of sampling 1000 times the final probabi
 
 In the solution of our quantum adiabatic algorithm (QAA), we use the predefined adiabatic pulse and the register we have defined before. In this case, we leave the system to evolve during 4$\mu s$. In this algorithm, we leave the system to evolve slowly enough to remain in states close to the ground state, therefore increasing the probability of getting states with low energy.
 
-<br><center><img src="./Figures/QAA_seq.png" width="600"></center><br>
+<br><center><img src="./Figures/QAA_seq_8q_pulses.png" width="600"></center><br>
 
+### QAA solution visualization for T = 4000 ns
+
+Below, it is shown the solution got using the QAA algorithm for the EVCN with 8 locations. The solution show a large probability of getting the optimal solution and an approximation ratio of 0.97.
+<br><center><img src="./Figures/r_qaa_8q.png" width="600"></center><br>
+
+#### Cost of QAA
+
+The figure below shows the evolution of the average energy of the EVCN for times ranging from 0.4$\mu$s to 10$\mu$s.
+<br><center><img src="./Figures/cost_fun_qaa_8q.png" width="600"></center><br>
+
+#### Approximation ratio of QAA
+<br><center><img src="./Figures/r_qaa_8q.png" width="600"></center><br>
