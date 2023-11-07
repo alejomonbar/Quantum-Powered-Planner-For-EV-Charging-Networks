@@ -46,4 +46,7 @@ $$m = \frac{\lambda_{min} - \lambda_{max}}{\delta_{max} - \delta_{min}}$$
 
 $$b = \lambda_{min} - m \delta_{max}$$
 
+<br><center><img src="./Figures/lambda_ij.png" width="400"></center><br>
+
+
 
