@@ -101,12 +101,15 @@ After applying the sequence of QAOA, we can visualize the probability distributi
 <br><center><img src="./Figures/hist_qaoa_q8.png" width="600"></center><br>
 
 #### Cost function for p layers
-
 The Figure below shows the average cost of sampling 1000 times the final probability distribution for different number of layers $p$ of the QAOA algorithm.
-
 <br><center><img src="./Figures/cost_fun_qaoa_q8.png" width="600"></center><br>
 
 #### Approximation ratio of QAOA
-
 <br><center><img src="./Figures/r_qaoa_8q.png" width="600"></center><br>
+
+# QAA Solution
+
+In the solution of our quantum adiabatic algorithm (QAA), we use the predefined adiabatic pulse and the register we have defined before. In this case, we leave the system to evolve during 4$\mu s$. In this algorithm, we leave the system to evolve slowly enough to remain in states close to the ground state, therefore increasing the probability of getting states with low energy.
+
+<br><center><img src="./Figures/QAA_seq.png" width="600"></center><br>
 
