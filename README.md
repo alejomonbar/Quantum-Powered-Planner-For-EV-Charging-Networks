@@ -58,7 +58,7 @@ In the figure below, we show the problem we use in our example. The background o
 
 Docplex is the Python interface of the IBM's CPLEX solver, a widely used solver for combinatorial optimization problems. This solver is highly efficient in solving linear programming and quadratic programming problems using state of the art optimization techniques. We will use this classical optimizer to find the optimal solution for our examples, as well as, to show the scalability properties of our task on classical solvers.
 
-<br><center><img src="./Figures/cplex_model.png" width="800"></center><br>
+<br><center><img src="./Figures/cplex_model.png" width="700"></center><br>
 
 ### Visualization of the solution
 
@@ -70,7 +70,7 @@ The Figure below shows the optimal solution for our example. The red dots repres
 
 Below, we show the brute force solution of the model consists of trying all the possible solutions. As this method grows as $2^n$ for $n$ charging station locations, it becomes prohibitively even for small problem sizes.
 
-<br><center><img src="./Figures/sol_brute_force.png" width="600"></center><br>
+<br><center><img src="./Figures/sol_brute_force.png" width="800"></center><br>
 
 ### Finding the neutral atoms' positions
 
@@ -94,7 +94,19 @@ Additianlly, we encode the $\gamma$ and $\beta$ parameters in the amplitude of $
 
 <br><center><img src="./Figures/QAOA_seq_pulses.png" width="600"></center><br>
 
+### Visualization of the final state probability distribution
 
+After applying the sequence of QAOA, we can visualize the probability distribution of the solutions. As we see below, two out of the three lowest energy solutions are the most probable to get this indicates that our method has success in finding good solutions.
 
+<br><center><img src="./Figures/hist_qaoa_q8.png" width="600"></center><br>
 
+#### Cost function for p layers
+
+The Figure below shows the average cost of sampling 1000 times the final probability distribution for different number of layers $p$ of the QAOA algorithm.
+
+<br><center><img src="./Figures/cost_fun_qaoa_q8.png" width="600"></center><br>
+
+#### Approximation ratio of QAOA
+
+<br><center><img src="./Figures/r_qaoa_8q.png" width="600"></center><br>
 
