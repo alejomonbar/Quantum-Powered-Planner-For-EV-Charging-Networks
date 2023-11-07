@@ -107,7 +107,7 @@ The Figure below shows the average cost of sampling 1000 times the final probabi
 #### Approximation ratio of QAOA
 <br><center><img src="./Figures/r_qaoa_8q.png" width="600"></center><br>
 
-# QAA Solution
+## QAA Solution
 
 In the solution of our quantum adiabatic algorithm (QAA), we use the predefined adiabatic pulse and the register we have defined before. In this case, we leave the system to evolve during 4$\mu s$. In this algorithm, we leave the system to evolve slowly enough to remain in states close to the ground state, therefore increasing the probability of getting states with low energy.
 
@@ -125,3 +125,68 @@ The figure below shows the evolution of the average energy of the EVCN for times
 
 #### Approximation ratio of QAA
 <br><center><img src="./Figures/r_qaa_8q.png" width="600"></center><br>
+
+## Comparison QAOA and QAA for the same evolution time
+
+<body>
+    <div style="display: flex; justify-content: space-between;">
+        <img src="./Figures/cost_comparison.png" width="320">
+        <img src="./Figures/r_comparison.png" width="400">
+    </div>
+</body>
+
+
+# Scale of the EVCN
+
+In this section, the scale properties of the EVCN are shown for the quantum and the classical solvers. For the quantum solver, we use the QAOA and QAA algorithms for problem sizes ranging from 5 to 13 qubits. 10 random cases are selected for each problem size. We show two quantifiers of the quantum algorithms, the probability of finding the 5 best solutions using each quantum solver $p(^*x)$, and the approximation ratio $r$. 
+
+## QAOA Solution
+
+For the QAOA solution, we use the transfer learning methodology we presented in previous sections. Therefore, p=10 layers are used with preoptimized values of a BPP obtained in gate based models are transfered to all the random cases we present here. This p=10 only requires $t=1 \mu s$.
+
+## QAA Solution
+
+For the QAA solution, we use two different annealing times $4\mu s$ and $10 \mu s$ to see if there are differences in the mean cost and optimal sampling rate between both times. We use the same annealing procedure presented above.
+
+## Plot quantum algorithms scaling solutions 
+
+For the plots shown below, the error bars represent the **quartiles** Q1 to Q2 and Q2 to Q3 and the marker is the **median** value over the 10 random cases. The information we can get at this scale is still too short to conclude about the scaling in the neutral atoms platform. But, the data shows good characteristics that we want to highlight:
+
+    1) Both methods QAOA and QAA show good characteristics to identify the optimal solution. This can be seen in the figure below, where the probability of finding the 5 best solutions remains higher than a quadratic speedup (The advantage of Grover's algorithm in dashed line).
+
+    2) There is an improvement in the approximation ratio for QAA changing T from 4 us to 10 us, but the difference is not too big. We need larger cases to see how they start to deviate. For both cases of QAA the approximation ration keeps above 0.9 while in QAOA it keeps above 0.8 without optimization.
+
+## Probability of finding the first 5 optimal solutions $p(^*x)$for QAOA and QAA
+<br><center><img src="./Figures/optimal_p.png" width="600"></center><br>
+
+## Approximation ratio $r$ for QAOA and QAA
+<br><center><img src="./Figures/r_factor.png" width="600"></center><br>
+
+## Docplex solution
+
+Finally, we did simulation of the EVCN model using classical computation. To this end, we select CPLEX because of being widely use in combinatorial optimization for business purposes. The EVCN problem is harder to solve than the MIS, and already with 1000 variables (the limit of CPLEX free version allows) the time to solution grows up to 30 seconds. If we take this solutions as an indication of the scaling time of the EVCN it will take around 3.6 hours for a 2000 variables solution and 54.4 years for 4000 variables on a MacBook Pro M1 with 8 cores. 
+
+### Comparison time to solution EVCN vs. MIS
+<br><center><img src="./Figures/CPLEX_time.png" width="600"></center><br>
+
+### Estimation of the time to solution using CPLEX for larger problem size
+This estimation is made based on the results of CPLEX scaling up to 1000 variables, i.e., the previous plot.
+<br><center><img src="./Figures/scaling_assumption.png" width="600"></center><br>
+
+# Conclusions
+
+We have presented the EVCN problem, a combinatorial optimization problem for the electric vehicle charging network election. It searches for the optimal allocation of charging stations that satisfies different characteristics in the election of locations such as population density, traffic patterns, existing infrastructure, and EV adoption rates. The model has been shown to be hard to solve using a classical optimizer compared to the MIS version of the same problem which only considers the distance between charging station locations. Additionally, this problem is perfectly tailored to the neutral atoms device of Pasqal, where atoms represent possible charging station locations, and the proximity of the represents the distance between charging station locations and the other factors mentioned previously.
+
+The solutions to the problem using quantum algorithms have been shown to give approximation ratios above 0.9 for the QAA algorithm for up to 13 qubits using an annealing time of $4 \mu s$, and an approximation ratio of 0.8 for QAOA with p=10 (time = $1\mu s$). In terms of the probability of finding optimal solutions, the QAA algorithm keeps above the quadratic speedup and the QAOA with the transfer learning technique in the same range of quadratic speedup. These two characteristics make us optimistic about this application, and we are ahead to test it on real hardware and a large number of qubits to have a stronger point about the scalability of the quantum algorithms.
+
+# Future Work 
+
+We anticipate that with generation 2 of the Pasqal machine, we will be able to encode larger problem sizes and with higher precision in the representation of the QUBO matrix $Q$ of the EVCN. The 3D layout of that generation will mean a jump in precision.
+
+However, for this problem to be meaningful at the production scale more atoms will be needed to surpass the classical solution limit. We envision being able to present solutions for EVCN with a grid size of 1000 x 1000, to this end, we will use a hybrid algorithm that solves small sections of the 1000 x 1000 grids using quantum computation and present them as the starting point of a classical heuristic algorithm such as simulate annealing to find good enough solutions of the problem. 
+
+We have seen that the classical algorithm already with 4000 variables requires 54 years to find the solution (this cannot be taken as a near-accurate estimation but helps in our statement). Let's think that it will take around 5 days on an HPC system to give a good enough solution for the 4000 variables, so to find the solution of a 100 x 100 grid (needed for a medium size city) we will need (100 x 100) / 4000 ~ 3 runs, this means 3 x 5 = 15 days time to find the initial guess for the heuristic algorithm. On the other hand, a neutral atom device with the 4000 variables and with a sampling ratio of 10 solutions per second will give us an initial guess solution of 3 x (1/10) ~ 0.3 seconds (we haven't done assumptions of the annealing time but as it is in the order of $\mu s$ we don't see a large overhead because of this parameter).
+
+## Example of a grid size of 100 x 100 in the city of Dallas
+
+<br><center><img src="./Figures/mid_size_city.png" width="600"></center><br>
