@@ -31,14 +31,14 @@ where $\lambda_{ij}$ not only represents a penalization of the connected locatio
 
 We assume a linear relation between the demand on two neighboring locations and the penalizations $\lambda_{ij}$. The cutoff charging demand values in the following text are selected as such for illustration purposes. We will scale them appropriately in a real-world implementation. In this example, we work with a demand $\delta_{i}$ arbitrary units for every location. If the sum of demands on two neighboring locations, $\delta_{T_{ij}}$, is less than $\delta_{min}$, the penalization is $\lambda_{max}$ (equal to the MIS). If the demand is between $\delta_{min}$ and $\delta_{max}$, the penalization will change proportionally to the demand, and if it is above $\delta_{max}$, a minimum penalization is used, i.e., $\lambda_{min}$.
 
-\begin{equation}
+$$
 \lambda_{i,j}(\delta_T) =
 \begin{cases}
   \lambda_{max} & \text{if } \delta_{T_{ij}} < \delta_{min} \\
   m \delta_{T_{ij}} + b & \text{if } \delta_{min} \le \delta_{T_{ij}} \le \delta_{max} \\
   \lambda_{min} & \text{if } \delta_{T_{ij}} > \delta_{max}  \\
 \end{cases}
-\end{equation}
+$$
 
 where $\delta_{i(j)}$ represents the demand at location $i(j)$, and $\delta_{T_{ij}} = \delta_i + \delta_j$ the sum of local demnads at postions $i$ and $j$. 
 
