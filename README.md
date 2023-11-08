@@ -1,3 +1,5 @@
+`Code in: Quantum_Powered_Planner_For_EV_Charging_Networks.ipynb`
+
 # QUANTUM-POWERED PLANNER FOR EV CHARGING NETWORKS
 ## Greening the road ahead: Charging demand location model for sustainable electric vehicle adoption.
 Quantum computers based on neutral atoms have introduced novel approaches to solving complex problems in combinatorial optimization. While many applications focus on encoding problems as maximal independent set (MIS) formulations, these devices can handle even more challenging tasks by utilizing the Rydberg blockade mechanism, allowing us to address non-linearities in problem formulations.
